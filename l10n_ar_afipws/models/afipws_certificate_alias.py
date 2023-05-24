@@ -191,7 +191,9 @@ class AfipwsCertificateAlias(models.Model):
                     'ascii', 'ignore')
             req.get_subject().L = self.city.encode(
                 'ascii', 'ignore')
-            req.get_subject().O = self.company_id.name.encode(
+            if len(self.company_id.name) > 64:
+                company_name = self.company_id.name[:65]
+            req.get_subject().O = company_name.encode(
                 'ascii', 'ignore')
             req.get_subject().OU = self.department.encode(
                 'ascii', 'ignore')
