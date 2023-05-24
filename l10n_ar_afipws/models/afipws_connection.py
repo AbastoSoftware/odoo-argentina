@@ -61,6 +61,7 @@ class AfipwsConnection(models.Model):
         ('ws_sr_padron_a5', 'Servicio de Consulta de Padrón Alcance 5'),
         ('ws_sr_padron_a10', 'Servicio de Consulta de Padrón Alcance 10'),
         ('ws_sr_padron_a100', 'Servicio de Consulta de Padrón Alcance 100'),
+        ('ws_sr_constancia_inscripcion', 'Servicio de Consulta de Constancia de Inscripción'),
     ],
         'AFIP WS',
         required=True,
@@ -104,7 +105,7 @@ class AfipwsConnection(models.Model):
                 afip_ws_url = (
                     "https://awshomo.afip.gov.ar/sr-padron/webservices/"
                     "personaServiceA4?wsdl")
-        elif afip_ws == 'ws_sr_padron_a5':
+        elif afip_ws == 'ws_sr_padron_a5' or afip_ws == 'ws_sr_constancia_inscripcion':
             if environment_type == 'production':
                 afip_ws_url = (
                     "https://aws.afip.gov.ar/sr-padron/webservices/"
@@ -191,7 +192,7 @@ class AfipwsConnection(models.Model):
         if afip_ws == 'ws_sr_padron_a4':
             from pyafipws.ws_sr_padron import WSSrPadronA4
             ws = WSSrPadronA4()
-        elif afip_ws == 'ws_sr_padron_a5':
+        elif afip_ws == 'ws_sr_padron_a5' or afip_ws == 'ws_sr_constancia_inscripcion':
             from pyafipws.ws_sr_padron import WSSrPadronA5
             ws = WSSrPadronA5()
         return ws
