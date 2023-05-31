@@ -193,6 +193,8 @@ class AfipwsCertificateAlias(models.Model):
                 'ascii', 'ignore')
             if len(self.company_id.name) > 64:
                 company_name = self.company_id.name[:65]
+            else:
+                company_name = self.company_id.name
             req.get_subject().O = company_name.encode(
                 'ascii', 'ignore')
             req.get_subject().OU = self.department.encode(
