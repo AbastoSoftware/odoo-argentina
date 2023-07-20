@@ -60,7 +60,7 @@
                                 <span t-field="o.tax_withholding_id.description"/>
                             </td>
                         </tr>
-                        <tr>
+                        <tr t-if="o.ref">
                             <td class="text-right">
                                 Régimen / Descripción:
                             </td>
