@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * l10n_ar_account
-# 
+#
 # Translators:
 # Juan José Scarafía <scarafia.juanjose@gmail.com>, 2016
 # Iván Todorovich <ivan.todorovich@gmail.com>, 2018
@@ -748,7 +748,7 @@ msgstr "Grav. 5%"
 #: model:ir.ui.view,arch_db:l10n_ar_account.view_company_inherit_form
 #: model:ir.ui.view,arch_db:l10n_ar_account.view_partner_property_form
 msgid "Gross Income"
-msgstr "Ingreos Brutos"
+msgstr "Ingresos Brutos"
 
 #. module: l10n_ar_account
 #: model:ir.model.fields,field_description:l10n_ar_account.field_res_company_gross_income_jurisdiction_ids
