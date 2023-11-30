@@ -11,6 +11,7 @@
                 <field name="importe_fijo"/>
                 <field name="porcentaje"/>
                 <field name="importe_excedente"/>
+                <field name="tabla_ganancias_id" options="{'no_create': 1}"/>
             </tree>
         </field>
     </record>
