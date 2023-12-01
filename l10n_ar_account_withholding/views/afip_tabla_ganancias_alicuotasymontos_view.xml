@@ -12,7 +12,7 @@
                 <field name="porcentaje_inscripto"/>
                 <field name="porcentaje_no_inscripto"/>
                 <field name="montos_no_sujetos_a_retencion"/>
-                <field name="tabla_ganancias_id" attrs="{'readonly': [('porcentaje_inscripto', '!=', -1.0)]}" options="{'no_create': 1}"/>
+                <field name="tabla_ganancias_id" attrs="{'readonly': [('porcentaje_inscripto', '!=', -1.0)], 'required': [('porcentaje_inscripto', '=', -1.0)]}" options="{'no_create': 1}"/>
             </tree>
         </field>
     </record>

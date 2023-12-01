@@ -9,7 +9,6 @@
                 <tree>
                     <field name="name"/>
                     <field name="update_date"/>
-                    <field name="description"/>
                 </tree>
             </field>
         </record>
@@ -31,13 +30,22 @@
                             <group>
                                 <field name="update_date"/>
                             </group>
-                            <group>
-                                <field name="description"/>
-                            </group>
+                            <group/>
                         </group>
                         <notebook>
                             <page string="Escala Ganancias">
-                                <field name="escala_ganancias_ids"/>
+                                <field name="escala_ganancias_ids">
+                                    <tree editable="top">
+                                        <field name="importe_desde"/>
+                                        <field name="importe_hasta"/>
+                                        <field name="importe_fijo"/>
+                                        <field name="porcentaje"/>
+                                        <field name="importe_excedente"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Descripción">
+                                <field name="description" widget="html"/>
                             </page>
                         </notebook>
                     </sheet>

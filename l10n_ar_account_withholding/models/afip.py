@@ -21,7 +21,7 @@ class AfipTablagananciasEscala(models.Model):
     importe_excedente = fields.Float(
         'S/ Exced. de $'
     )
-    tabla_ganancias_id = fields.Many2one('afip.tabla_ganancias.tabla', string='Tabla ganancias')
+    tabla_ganancias_id = fields.Many2one('afip.tabla_ganancias.tabla', string='Tabla ganancias', ondelete='cascade')
 
 
 class AfipTablagananciasAlicuotasymontos(models.Model):
@@ -57,10 +57,10 @@ class AfipTablaGananciasTabla(models.Model):
 
     name = fields.Char(string='Nombre')
     update_date = fields.Date(string='Fecha de actualización')
-    description = fields.Char(string='Descripción')
+    description = fields.Html(string='Descripción')
     escala_ganancias_ids = fields.One2many('afip.tabla_ganancias.escala', 'tabla_ganancias_id', string='Escala ganancias')
 
-    @api.constrains('escala_ids')
+    @api.constrains('escala_ganancias_ids')
     def _check_escala(self):
         for rec in self:
             if rec.escala_ganancias_ids:
