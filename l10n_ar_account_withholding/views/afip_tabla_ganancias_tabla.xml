@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="afip_tabla_ganancias_tabla_view_tree" model="ir.ui.view">
+            <field name="name">afip.tabla.ganancias.tabla.view.tree</field>
+            <field name="model">afip.tabla_ganancias.tabla</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="update_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="afip_tabla_ganancias_tabla_view_form" model="ir.ui.view">
+            <field name="name">afip.tabla.ganancias.tabla.view.form</field>
+            <field name="model">afip.tabla_ganancias.tabla</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header/>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box"/>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" required="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="update_date"/>
+                            </group>
+                            <group/>
+                        </group>
+                        <notebook>
+                            <page string="Escala Ganancias">
+                                <field name="escala_ganancias_ids">
+                                    <tree editable="top">
+                                        <field name="importe_desde"/>
+                                        <field name="importe_hasta"/>
+                                        <field name="importe_fijo"/>
+                                        <field name="porcentaje"/>
+                                        <field name="importe_excedente"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Descripción">
+                                <field name="description" widget="html"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="afip_tabla_ganancias_tabla_action" model="ir.actions.act_window">
+            <field name="name">Tablas Ganancias</field>
+            <field name="res_model">afip.tabla_ganancias.tabla</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="afip_tabla_ganancias_tabla_menu_action" name="Tablas Ganancias" parent="l10n_ar_account.menu_afip_config" action="afip_tabla_ganancias_tabla_action" sequence="94"/>
+
+    </data>
+</odoo>

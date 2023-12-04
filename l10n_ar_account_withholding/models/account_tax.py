@@ -113,6 +113,7 @@ class AccountTax(models.Model):
                     escala = self.env['afip.tabla_ganancias.escala'].search([
                         ('importe_desde', '<=', base_amount),
                         ('importe_hasta', '>', base_amount),
+                        ('tabla_ganancias_id', '=', regimen.tabla_ganancias_id.id)
                     ], limit=1)
                     if not escala:
                         raise UserError(
