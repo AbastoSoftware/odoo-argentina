@@ -146,4 +146,9 @@ class AccountMove(models.Model):
         # when issuer is supplier de numbering works opposite (supplier numerate invoices, customer encode bill)
         if self.country_code == 'AR' and self.journal_id._l10n_ar_journal_issuer_is_supplier():
             return not res
+        manual_pos_param = self.env['ir.config_parameter'].sudo().get_param('afip.journal.online.pos.usage')
+        if manual_pos_param and str(manual_pos_param).isnumeric() and int(manual_pos_param):
+            manual_usage_pos = ['II_IM', 'RLI_RLM', 'BFERCEL', 'FEERCELP', 'FEERCEL', 'CPERCEL']
+            if self.country_code == 'AR' and self.journal_id.type == 'sale' and self.journal_id.l10n_latam_use_documents and self.journal_id.l10n_ar_afip_pos_system in manual_usage_pos:
+                return True
         return res
