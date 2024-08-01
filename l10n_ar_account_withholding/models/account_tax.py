@@ -75,6 +75,7 @@ class AccountTax(models.Model):
 
         if self.withholding_type == 'partner_tax':
             amount = base_amount * (alicuota)
+            vals['withholding_alicuot_amount'] = alicuota * 100
             vals['comment'] = "%s x %s" % (
                 base_amount, alicuota)
             vals['period_withholding_amount'] = amount
@@ -123,17 +124,20 @@ class AccountTax(models.Model):
                         escala.importe_fijo,
                         base_amount - escala.importe_excedente,
                         escala.porcentaje / 100.0)
+                    vals['withholding_alicuot_amount'] = escala.porcentaje
                 else:
                     amount = base_amount * (
                         regimen.porcentaje_inscripto / 100.0)
                     vals['comment'] = "%s x %s" % (
                         base_amount, regimen.porcentaje_inscripto / 100.0)
+                    vals['withholding_alicuot_amount'] = regimen.porcentaje_inscripto
             elif imp_ganancias_padron == 'NI':
                 # alicuota no inscripto
                 amount = base_amount * (
                     regimen.porcentaje_no_inscripto / 100.0)
                 vals['comment'] = "%s x %s" % (
                     base_amount, regimen.porcentaje_no_inscripto / 100.0)
+                vals['withholding_alicuot_amount'] = regimen.porcentaje_no_inscripto
             # TODO, tal vez sea mejor utilizar otro campo?
             vals['ref'] = "%s - %s" % (
                 regimen.codigo_de_regimen, regimen.concepto_referencia)
@@ -161,7 +165,7 @@ class AccountTax(models.Model):
             ('to_date', '=', False),
             ('to_date', '>=', date),
         ], limit=1)
-     
+
         # solo buscamos en padron para estas responsabilidades
         if not alicuot and \
                 commercial_partner.l10n_ar_afip_responsibility_type_id.code in \
