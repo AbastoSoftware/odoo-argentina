@@ -99,3 +99,8 @@ class AccountPaymentGroup(models.Model):
     #             not payment_group.regimen_ganancias_id):
     #         payment_group.retencion_ganancias = 'no_aplica'
     #     return payment_group
+
+class AccountPayment(models.Model):
+    _inherit = 'account.payment'
+
+    withholding_alicuot_amount = fields.Float(string='Alicuota de retencion')
