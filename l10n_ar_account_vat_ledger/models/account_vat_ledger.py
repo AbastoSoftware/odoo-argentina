@@ -150,6 +150,19 @@ class AccountVatLedger(models.Model):
                 ('tax_line_id.tax_group_id.tax', '=', 'vat'),
             ])
 
+    def _compute_data_invoice_domain(self):
+        self.ensure_one()
+        domain = [
+            # cancel invoices with internal number are invoices
+            ('state', '!=', 'draft'),
+            ('number', '!=', False),
+            # ('internal_number', '!=', False),
+            ('journal_id', 'in', self.journal_ids.ids),
+            ('date', '>=', self.date_from),
+            ('date', '<=', self.date_to),
+        ]
+        return domain
+
     @api.multi
     @api.depends('journal_ids', 'date_from', 'date_to')
     def _compute_data(self):
@@ -157,15 +170,7 @@ class AccountVatLedger(models.Model):
             rec.afip_responsability_type_ids = rec.env[
                 'afip.responsability.type'].search([])
 
-            invoices_domain = [
-                # cancel invoices with internal number are invoices
-                ('state', '!=', 'draft'),
-                ('number', '!=', False),
-                # ('internal_number', '!=', False),
-                ('journal_id', 'in', rec.journal_ids.ids),
-                ('date', '>=', rec.date_from),
-                ('date', '<=', rec.date_to),
-            ]
+            invoices_domain = self._compute_data_invoice_domain()
 
             # Get invoices
             invoices = rec.env['account.invoice'].search(
